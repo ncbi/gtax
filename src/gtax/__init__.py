@@ -1,7 +1,7 @@
 from pkg_resources import DistributionNotFound
 
 try:
-    _distribution = __import__('pkg_resources').get_distribution("gatx")
+    _distribution = __import__('pkg_resources').get_distribution("gtax")
 except DistributionNotFound:  # Likely, running from working dir without installed dist
     __version__ = 'SNAPSHOT'
 else:
