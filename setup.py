@@ -29,7 +29,7 @@ setup(
     author_email='veraalva' '@' 'ncbi.nlm.nih.gov',
     maintainer='Vera Alvarez, Roberto',
     maintainer_email='veraalva' '@' 'ncbi.nlm.nih.gov',
-    url='https://github.com/ncbi/pm4ngs',
+    url='https://github.com/ncbi/gtax',
     install_requires=['biopython',
                       'networkx',
                       'numpy',
@@ -48,7 +48,7 @@ setup(
     ],
     keywords='Biocontainers',
     project_urls={
-        'Documentation': 'https://gatx.readthedocs.io/',
+        'Documentation': 'https://gtax.readthedocs.io/',
         'Source': 'https://github.com/ncbi/gtax',
         'Tracker': 'https://github.com/ncbi/gtax/issues',
     },
