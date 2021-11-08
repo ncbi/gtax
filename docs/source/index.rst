@@ -20,17 +20,20 @@ Introduction
 `GTAX`_ is a python package to create a FASTA sequence based database from different taxonomy groups including
 available genomes at NCBI Genome database.
 
+Gtax is comprised of 17 taxonomic groups that cover all superkingdoms:
 
+.. image:: /_static/taxonomy_groups.png
+    :width: 300px
+    :alt: Taxonomy groups
 
 .. _GTAX: https://github.com/ncbi/gtax
 
-Features
---------
+Gtax Blast databases
+--------------------
 
-*
+Gtax Blast databases are publicly available at GCP:
 
-Citation
--------------
+   gs://gtax-blastdb-database
 
 Help and Support
 ----------------
