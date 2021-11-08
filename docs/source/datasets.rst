@@ -1,0 +1,111 @@
+.. _datasets:
+
+
+
+####################
+Create GTAX database
+####################
+
+Download genomes data with NCBI Datsets
+---------------------------------------
+
+Gtax uses four taxonomy superkingdoms for downloading data: *archaea*, *bacteria*, *viruses* and *eukaryotes*
+
+Users need to run these commands to download the genomes sequences:
+
+Archaea
+=======
+
+.. code-block:: bash
+
+    localhost:~> datasets download genome taxon 2157 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
+    localhost:~> mv ncbi_meta.zip archaea_meta.zip
+
+Bacteria
+========
+
+.. code-block:: bash
+
+    localhost:~> datasets download genome taxon 2 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
+    localhost:~> mv ncbi_meta.zip bacteria_meta.zip
+
+Viruses
+=======
+
+.. code-block:: bash
+
+    localhost:~> datasets download genome taxon 10239 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
+    localhost:~> mv ncbi_meta.zip viruses_meta.zip
+
+Eukaryotes
+==========
+
+.. code-block:: bash
+
+    localhost:~> datasets download genome taxon 2759 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
+    localhost:~> mv ncbi_meta.zip eukaryotes_meta.zip
+
+Process metadata and creates the directories for hydration
+----------------------------------------------------------
+
+The command `filter_metadata_zip` will read the zipped metadata file for each superkingdom and create the folders for
+hydration with the **datasets** command. This command will keep the reference genome for each taxa if it is available.
+If no reference genome is available, the latest assembly will be kept.
+
+.. code-block:: bash
+
+    localhost:~> filter_metadata_zip
+
+Hydrate directories with datasets
+---------------------------------
+
+Archaea
+=======
+
+.. code-block:: bash
+
+    localhost:~> cd archaea
+    localhost:~> datasets rehydrate --directory .
+
+Bacteria
+========
+
+.. code-block:: bash
+
+    localhost:~> cd bacteria
+    localhost:~> datasets rehydrate --directory .
+
+Viruses
+=======
+
+.. code-block:: bash
+
+    localhost:~> cd viruses
+    localhost:~> datasets rehydrate --directory .
+
+Eukaryotes
+==========
+
+.. code-block:: bash
+
+    localhost:~> cd eukaryotes
+    localhost:~> datasets rehydrate --directory .
+
+Create Gtax FASTA files
+-----------------------
+
+After all data is downloaded, it will take few hours to finish, we can create the FASTA, indexes and taxid maps for the
+databases.
+
+.. code-block:: bash
+
+    localhost:~> gtax_database
+
+
+Gtax is comprised of 17 taxonomic groups that cover all superkingdoms:
+
+.. image:: /_static/taxonomy_groups.png
+    :width: 300px
+    :alt: Taxonomy groups
+
+

@@ -55,7 +55,8 @@ setup(
     entry_points={
         'console_scripts': [
             'taxonomy_pickle = gtax.taxonomy_main:taxonomy_pickle',
-            'gtax_database = gtax.gtax_main:gtax_database'
+            'gtax_database = gtax.gtax_main:gtax_database',
+            'filter_metadata_zip = gtax.gtax_main:filter_metadata_zip'
         ],
     }
 )

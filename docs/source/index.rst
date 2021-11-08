@@ -12,11 +12,15 @@ GTAX
    :hidden:
 
    installation
+   datasets
 
 Introduction
 ------------
 
-`GTAX`_ is a python package to create a FASTA sequence based database from different taxonomy groups.
+`GTAX`_ is a python package to create a FASTA sequence based database from different taxonomy groups including
+available genomes at NCBI Genome database.
+
+
 
 .. _GTAX: https://github.com/ncbi/gtax
 

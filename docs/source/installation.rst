@@ -10,9 +10,36 @@ Requirements
 
  1. NCBI Datasets (https://www.ncbi.nlm.nih.gov/datasets/docs/v1/quickstarts/command-line-tools/)
 
-**************************************
-GTAX with Conda/BioConda (Recommended)
-**************************************
+************************************
+GTAX with Python virtual environment
+************************************
+
+GTAX python installation
+==========================
+
+Python 3.7 or above should be installed.
+
+.. code-block:: bash
+
+    localhost:~> python3 -m venv gtax_venv
+    localhost:~> source gtax_venv/bin/activate
+    (pm4ngs_venv) localhost:~> pip install wheel
+    (pm4ngs_venv) localhost:~> pip install gtax
+
+GTAX python env activation
+============================
+
+For activating the virtual env:
+
+.. code-block:: bash
+
+    localhost:~> source gtax_venv/bin/activate
+    (pm4ngs_venv) localhost:~> gtax -v
+    GTAX version: 0.0.1
+
+************************
+GTAX with Conda/BioConda
+************************
 
 Conda installation
 ==================
@@ -49,29 +76,3 @@ For activating the conda env:
 
 .. _Conda: https://github.com/conda/conda
 
-************************************
-GTAX with Python virtual environment
-************************************
-
-GTAX python installation
-==========================
-
-Python 3.7 or above should be installed.
-
-.. code-block:: bash
-
-    localhost:~> python3 -m venv gtax_venv
-    localhost:~> source gtax_venv/bin/activate
-    (pm4ngs_venv) localhost:~> pip install wheel
-    (pm4ngs_venv) localhost:~> pip install gtax
-
-GTAX python env activation
-============================
-
-For activating the virtual env:
-
-.. code-block:: bash
-
-    localhost:~> source gtax_venv/bin/activate
-    (pm4ngs_venv) localhost:~> gtax -v
-    GTAX version: 0.0.1
