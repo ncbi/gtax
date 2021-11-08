@@ -16,7 +16,7 @@ GTAX
 Introduction
 ------------
 
-`GTAX`_
+`GTAX`_ is a python package to create a FASTA sequence based database from different taxonomy groups.
 
 .. _GTAX: https://github.com/ncbi/gtax
 
