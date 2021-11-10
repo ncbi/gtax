@@ -101,11 +101,3 @@ databases.
 
     localhost:~> gtax_database
 
-
-GTax is comprised of 17 taxonomic groups that cover all superkingdoms:
-
-.. image:: /_static/taxonomy_groups.png
-    :width: 400px
-    :alt: Taxonomy groups
-
-
