@@ -21,11 +21,9 @@ def gtax_database():
     taxonomy = Taxonomy()
     dbs = taxonomy.taxonomy_groups.keys()
     print('Processing {} databases'.format(dbs))
-    p = Pool(len(dbs))
-    results = p.map(partial(gtax_parallel, taxonomy=taxonomy), dbs)
-    p.close()
-
-    taxonomy.taxonomy.create_taxonomy_groups()
+    with Pool(len(dbs)) as p:
+        p.map(partial(gtax_parallel, taxonomy=taxonomy), dbs)
+    taxonomy.create_taxonomy_groups()
     taxonomy.create_pickle('taxonomy.pickle',
                            'taxonomy_groups.pickle')
 

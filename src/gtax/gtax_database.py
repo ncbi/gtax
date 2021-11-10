@@ -39,8 +39,7 @@ def create_taxonomy_group_fasta(db):
             for r in SeqIO.parse('{}/ncbi_dataset/data/{}/{}'.format(db, s, f), 'fasta'):
                 seq_len = len(r.seq)
                 if seq_len >= 1000 and use_sequence(r.id):
-                    v = ids.setdefault(r.id, False)
-                    if not v:
+                    if not ids.setdefault(r.id, False):
                         ids[r.id] = True
                         fstream_tax.write('{}\t{}\n'.format(r.id, assemblies[s]))
                         fstream_idx.write('{}\t{}\t{}\t{}\n'.format(
@@ -79,8 +78,7 @@ def create_taxonomy_group_eukaryotes_fasta(db, taxonomy):
             for r in SeqIO.parse('eukaryotes/ncbi_dataset/data/{}/{}'.format(s, f), 'fasta'):
                 seq_len = len(r.seq)
                 if seq_len >= 10000 and use_sequence(r.id):
-                    v = ids.setdefault(r.id, False)
-                    if not v:
+                    if not ids.setdefault(r.id, False):
                         ids[r.id] = True
                         fstream_tax.write('{}\t{}\n'.format(r.id, assemblies[s]))
                         fstream_idx.write('{}\t{}\t{}\t{}\n'.format(

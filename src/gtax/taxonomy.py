@@ -44,6 +44,8 @@ class Taxonomy:
         self.taxonomy_groups = kwargs.get('taxonomy_groups', {
             'bacteria': {'taxid': '2', 'nodes': set(), 'sequences': set(), 'size': 0},
             'archaea': {'taxid': '2157', 'nodes': set(), 'sequences': set(), 'size': 0},
+            'liliopsida': {'taxid': '4447', 'nodes': set(), 'sequences': set(), 'size': 0},
+            'eudicotyledons': {'taxid': '71240', 'nodes': set(), 'sequences': set(), 'size': 0},
             'viridiplantae': {'taxid': '33090', 'nodes': set(), 'sequences': set(), 'size': 0},
             'fungi': {'taxid': '4751', 'nodes': set(), 'sequences': set(), 'size': 0},
             'arthropoda': {'taxid': '6656', 'nodes': set(), 'sequences': set(), 'size': 0},
@@ -60,6 +62,7 @@ class Taxonomy:
             'eukaryota': {'taxid': '2759', 'nodes': set(), 'sequences': set(), 'size': 0},
             'viruses': {'taxid': '10239', 'nodes': set(), 'sequences': set(), 'size': 0},
         })
+        self.nodes = None
         self.tax = nx.DiGraph()
         if name_file and node_file:
             self.create_taxonomy_graph(name_file, node_file)
@@ -67,6 +70,7 @@ class Taxonomy:
         elif tax_pickle_file:
             self.tax = pickle.load(open(tax_pickle_file, "rb"))
             print('{} taxonomies loaded'.format(len(self.tax.nodes())))
+            self.nodes = self.tax.nodes(data=True)
             self.taxonomy_groups = pickle.load(open(group_pickle_file, "rb"))
             for k in self.taxonomy_groups:
                 print('{} Node: {} Sequences: {}'.format(
@@ -102,11 +106,11 @@ class Taxonomy:
         return result
 
     def find_node(self, id):
-        nodes = [y for x, y in self.tax.nodes(data=True) if y['id'] == id]
+        nodes = [y for x, y in self.nodes if y['id'] == id]
         if nodes:
             a = ""
             for i in nx.shortest_path(self.tax, source="1", target=id)[2:]:
-                ns = [y for x, y in self.tax.nodes(data=True) if y['id'] == i]
+                ns = [y for x, y in self.nodes if y['id'] == i]
                 if ns:
                     if a:
                         a += "; "
@@ -115,7 +119,7 @@ class Taxonomy:
         return None, None
 
     def find_node_by_name(self, name):
-        for n in self.tax.nodes(data=True):
+        for n in self.nodes:
             if n[1]['name'].casefold() == name.casefold():
                 return n
         return None
@@ -123,7 +127,7 @@ class Taxonomy:
     def get_node_lineage(self, node):
         a = ""
         for i in nx.shortest_path(self.tax, source="1", target=node[0])[2:]:
-            ns = [y for x, y in self.tax.nodes(data=True) if y['id'] == i]
+            ns = [y for x, y in self.nodes if y['id'] == i]
             if ns:
                 if a:
                     a += "; "
@@ -144,6 +148,7 @@ class Taxonomy:
         for e in edges:
             if e:
                 self.tax.add_edge(*e)
+        self.nodes = self.tax.nodes(data=True)
 
     def get_successors(self, taxid):
         return set([int(i) for i in self.successors(taxid)])
@@ -170,7 +175,6 @@ class Taxonomy:
 
     def create_taxonomy_groups(self):
         inserted = set()
-        nodes = self.tax.nodes(data=True)
         for k in self.taxonomy_groups:
             self.taxonomy_groups[k]['nodes'] = \
                 self.get_successors(self.taxonomy_groups[k]['taxid']).difference(
@@ -179,25 +183,24 @@ class Taxonomy:
             self.add_sequences_size_from_gtax_idx(k)
             for node_id in self.taxonomy_groups[k]['nodes']:
                 node_id = str(node_id)
-                if 'size' in nodes[node_id]:
-                    self.taxonomy_groups[k]['sequences'].update(nodes[node_id]['sequences'])
-                    self.taxonomy_groups[k]['size'] += nodes[node_id]['size']
+                if 'size' in self.nodes[node_id]:
+                    self.taxonomy_groups[k]['sequences'].update(self.nodes[node_id]['sequences'])
+                    self.taxonomy_groups[k]['size'] += self.nodes[node_id]['size']
 
     def create_pickle(self, tax_pickle_file, group_pickle_file):
-        print('Printing tax graph pickle file')
+        print('Printing tax graph pickle file: {}'.format(tax_pickle_file))
         pickle.dump(self.tax, open(tax_pickle_file, "wb"))
-        print('Printing tax group pickle file')
+        print('Printing tax group pickle file: {}'.format(group_pickle_file))
         pickle.dump(self.taxonomy_groups, open(group_pickle_file, "wb"))
 
     def print_size(self, node_name, deep=1, step=1, min_size=10.0, min_size_child=50.0):
-        nodes = self.tax.nodes(data=True)
         node = self.find_node_by_name(node_name)
         size = 0
         taxa = 0
         for node_id in self.successors(node[1]['id']):
-            if 'sequences' in nodes[node_id]:
+            if 'sequences' in self.nodes[node_id]:
                 taxa += 1
-                size += nodes[node_id]['size']
+                size += self.nodes[node_id]['size']
         size = size / 1e+9
         if size >= min_size:
             print('{}{} {} => {:.2f} GB'.format('   ' * step, node_name, node[1]['id'], size))
@@ -205,5 +208,5 @@ class Taxonomy:
         if step < deep and size >= min_size_child:
             for t in self.tax.successors(node[1]['id']):
                 if t != node[1]['id']:
-                    self.print_size(self.find_node(t)[0]['name'],
+                    self.print_size(self.nodes[str(t)]['name'],
                                     deep, step, min_size, min_size_child)

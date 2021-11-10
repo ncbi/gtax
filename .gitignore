@@ -9,6 +9,7 @@
 /.env
 venv/
 env/
+data/
 
 # Packaging
 /.cache/

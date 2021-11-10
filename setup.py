@@ -13,7 +13,7 @@ def readme():
 exec(open('src/gtax/__init__.py').read())
 
 setup(
-    name='gatx',
+    name='gtax',
     packages=find_packages(where='src'),
     package_dir={
         '': 'src',
@@ -56,7 +56,8 @@ setup(
         'console_scripts': [
             'taxonomy_pickle = gtax.taxonomy_main:taxonomy_pickle',
             'gtax_database = gtax.gtax_main:gtax_database',
-            'filter_metadata_zip = gtax.gtax_main:filter_metadata_zip'
+            'filter_metadata_zip = gtax.gtax_main:filter_metadata_zip',
+            'create_random_short_sequences = gtax.sequence:create_random_short_sequences'
         ],
     }
 )
