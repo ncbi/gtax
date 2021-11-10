@@ -3,13 +3,13 @@
 
 
 ####################
-Create GTAX database
+Create GTax database
 ####################
 
 Download genomes data with NCBI Datsets
 ---------------------------------------
 
-Gtax uses four taxonomy superkingdoms for downloading data: *archaea*, *bacteria*, *viruses* and *eukaryotes*
+GTax uses four taxonomy superkingdoms for downloading data: *archaea*, *bacteria*, *viruses* and *eukaryotes*
 
 Users need to run these commands to download the genomes sequences:
 
@@ -48,7 +48,7 @@ Eukaryotes
 Process metadata and creates the directories for hydration
 ----------------------------------------------------------
 
-The command `filter_metadata_zip` will read the zipped metadata file for each superkingdom and create the folders for
+The command **filter_metadata_zip** will read the zipped metadata file for each superkingdom and create the folders for
 hydration with the **datasets** command. This command will keep the reference genome for each taxa if it is available.
 If no reference genome is available, the latest assembly will be kept.
 
@@ -94,7 +94,7 @@ Eukaryotes
 Create Gtax FASTA files
 -----------------------
 
-After all data is downloaded, it will take few hours to finish, we can create the FASTA, indexes and taxid maps for the
+After all data is downloaded, it will take few hours to finish, we can create the FASTA, indexes and TaxID maps for the
 databases.
 
 .. code-block:: bash
@@ -102,7 +102,7 @@ databases.
     localhost:~> gtax_database
 
 
-Gtax is comprised of 17 taxonomic groups that cover all superkingdoms:
+GTax is comprised of 17 taxonomic groups that cover all superkingdoms:
 
 .. image:: /_static/taxonomy_groups.png
     :width: 400px

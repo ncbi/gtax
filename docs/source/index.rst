@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-GTAX
+GTax
 ====
 
 .. toctree::
@@ -17,28 +17,30 @@ GTAX
 Introduction
 ------------
 
-`GTAX`_ is a python package to create a FASTA sequence based database from different taxonomy groups including
-available genomes at NCBI Genome database.
+`GTax`_ python package provides tools for the creation of the GTax sequence-based database. This database includes
+one assembly per organism deposited in the NCBI Genomes database. The sequences are organized by 17 taxonomic levels
+from *superkindom* to *clades*. Python pickle files are also provided with a graph data structure for the taxonomic
+tree.
 
-Gtax is comprised of 17 taxonomic groups that cover all superkingdoms:
+GTax is comprised of 17 taxonomic levels that cover all taxonomic superkingdoms:
 
 .. image:: /_static/taxonomy_groups.png
     :width: 400px
     :alt: Taxonomy groups
 
-.. _GTAX: https://github.com/ncbi/gtax
+.. _GTax: https://github.com/ncbi/gtax
 
-Gtax Blast databases
+GTax Blast databases
 --------------------
 
-Gtax Blast databases are publicly available at GCP:
+GTax Blast databases are publicly available at GCP:
 
    gs://gtax-blastdb-database
 
 Help and Support
 ----------------
 
-For query/questions regarding Gtax, please write write veraalva@ncbi.nlm.nih.gov
+For query/questions regarding GTax, please write write veraalva@ncbi.nlm.nih.gov
 
 For feature requests or bug reports, please open an issue on `our GitHub Repository <https://github.com/ncbi/gtax>`__.
 
