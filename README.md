@@ -2,7 +2,7 @@ GTax
 ====
 
 **GTax** python package provides tools for the creation of the GTax sequence-based database. This database includes
-one assembly per organism deposited in the NCBI Genomes database. The sequences are organized by 17 taxonomic levels
+one assembly per organism deposited in the NCBI Genomes database. The sequences are organized by 19 taxonomic levels
 from *superkindom* to *clades*. Python pickle files are also provided with a graph data structure for the taxonomic 
 tree.
 
