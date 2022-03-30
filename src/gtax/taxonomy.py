@@ -210,3 +210,9 @@ class Taxonomy:
                 if t != node[1]['id']:
                     self.print_size(self.nodes[str(t)]['name'],
                                     deep, step, min_size, min_size_child)
+
+    def get_taxonomy_group_from_taxid(self, taxid):
+        for k in self.taxonomy_groups:
+            if taxid in self.taxonomy_groups[k]['nodes']:
+                return k
+        return None

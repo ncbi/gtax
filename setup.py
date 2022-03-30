@@ -57,7 +57,8 @@ setup(
             'taxonomy_pickle = gtax.taxonomy_main:taxonomy_pickle',
             'gtax_database = gtax.gtax_main:gtax_database',
             'filter_metadata_zip = gtax.gtax_main:filter_metadata_zip',
-            'create_random_short_sequences = gtax.sequence:create_random_short_sequences'
+            'create_random_short_sequences = gtax.sequence:create_random_short_sequences',
+            'sequence_binning = gtax.sequence_binning:sequence_binning_main'
         ],
     }
 )

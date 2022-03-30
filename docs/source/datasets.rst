@@ -19,7 +19,7 @@ Archaea
 .. code-block:: bash
 
     localhost:~> datasets download genome taxon 2157 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
-    localhost:~> mv ncbi_meta.zip archaea_meta.zip
+    localhost:~> mv ncbi_dataset.zip archaea_meta.zip
 
 Bacteria
 ========
@@ -27,7 +27,7 @@ Bacteria
 .. code-block:: bash
 
     localhost:~> datasets download genome taxon 2 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
-    localhost:~> mv ncbi_meta.zip bacteria_meta.zip
+    localhost:~> mv ncbi_dataset.zip bacteria_meta.zip
 
 Viruses
 =======
@@ -35,7 +35,7 @@ Viruses
 .. code-block:: bash
 
     localhost:~> datasets download genome taxon 10239 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
-    localhost:~> mv ncbi_meta.zip viruses_meta.zip
+    localhost:~> mv ncbi_dataset.zip viruses_meta.zip
 
 Eukaryotes
 ==========
@@ -43,7 +43,7 @@ Eukaryotes
 .. code-block:: bash
 
     localhost:~> datasets download genome taxon 2759 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
-    localhost:~> mv ncbi_meta.zip eukaryotes_meta.zip
+    localhost:~> mv ncbi_dataset.zip eukaryotes_meta.zip
 
 Process metadata and creates the directories for hydration
 ----------------------------------------------------------
