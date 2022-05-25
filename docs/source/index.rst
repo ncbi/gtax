@@ -13,6 +13,7 @@ GTax
 
    installation
    datasets
+   database
 
 Introduction
 ------------
