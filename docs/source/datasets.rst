@@ -1,7 +1,5 @@
 .. _datasets:
 
-
-
 ####################
 Create GTax database
 ####################

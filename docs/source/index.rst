@@ -30,12 +30,20 @@ GTax is comprised of 19 taxonomic levels that cover all taxonomic superkingdoms:
 
 .. _GTax: https://github.com/ncbi/gtax
 
-GTax Blast databases
---------------------
+Current version
+---------------
 
-GTax Blast databases are publicly available at GCP:
+The current public version is available in GCP for download. You need to use your GCP project as this bucket uses
+**Requester Pays** option.
 
-   gs://gtax-blastdb-database
+```
+gsutil -u <you-GCP-project> -m cp -r gs://gtax-database/20211025 .
+```
+
+The database is comprised of two folder: **blastdb** and **fasta**. The **blastdb** folder include the BLAST
+indexes for BLAST searches. The **fasta** folder includes the FASTA files for the taxonomy groups and two
+Python Objects in pickle files (**taxonomy.pickle** and **taxonomy_groups.pickle**) which are used to load
+all GTax metadata into the [Taxonomy class](https://github.com/ncbi/gtax/blob/main/src/gtax/taxonomy.py#L37)
 
 Help and Support
 ----------------
