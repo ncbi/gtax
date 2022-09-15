@@ -9,7 +9,7 @@ from gtax.taxonomy import Taxonomy
 
 
 def transcript_contamination(t, blast_df, tax_ids, taxonomy):
-    df = blast_df[blast_df['qseqid'] == t].copy()
+    df = blast_df[blast_df['qseqid'] == t]
     if not df.empty:
         df = df[df['evalue'] == df['evalue'].min()]
         if not all(elem in tax_ids for elem in df['staxid'].unique()):
