@@ -7,7 +7,7 @@ Process BLAST results to remove contamination
 After de novo transcriptome assembly, BLASTN can be used to detect contaminated transcripts
 that should be removed from the assembly.
 
-Elastic-BLast
+Elastic-Blast
 =============
 
 Run elastic-blast in your cloud provider as explined here_.
@@ -32,7 +32,7 @@ Run this command to detect and remove contaminated transcripts.
 
 .. code-block:: bash
 
-    taxonomy_blast --threads 8 --prefix Trinity --fasta Trinity.fasta.gz --taxid 33090 --blastdir ./ --blast_columns "qseqid sgi saccver length pident evalue bitscore score qcovs qcovhsp qcovus staxid"
+        localhost:~> taxonomy_blast --threads 8 --prefix Trinity --fasta Trinity.fasta.gz --taxid 33090 --blastdir ./ --blast_columns "qseqid sgi saccver length pident evalue bitscore score qcovs qcovhsp qcovus staxid"
 
 **--taxid** option refers to the parent taxonomy ID to use as valid taxonomies. For instance, to process
 plant transcriptome, use taxid as 33090 which is the taxid of the *Viridiplantae* kingdom.
