@@ -15,7 +15,7 @@ GTAX with Python virtual environment
 ************************************
 
 GTAX python installation
-==========================
+========================
 
 Python 3.7 or above should be installed.
 
@@ -27,7 +27,7 @@ Python 3.7 or above should be installed.
     (pm4ngs_venv) localhost:~> pip install gtax
 
 GTAX python env activation
-============================
+==========================
 
 For activating the virtual env:
 

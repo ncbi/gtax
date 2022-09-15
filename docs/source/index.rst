@@ -14,6 +14,7 @@ GTax
    installation
    datasets
    database
+   blast
 
 Introduction
 ------------

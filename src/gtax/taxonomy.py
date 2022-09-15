@@ -15,7 +15,8 @@ def parse_nodes_file(node_file, taxid):
             f = line.strip().split('\t|\t')
             node = {}
             node['id'] = f[0]
-            node['name'] = taxid[f[0]]['scientific name']
+            node['name_'] = taxid[f[0]]['scientific name']
+            node['rank'] = f[2]
             edge = ()
             if f[1] != node['id']:
                 edge = (f[1], node['id'])
@@ -114,13 +115,13 @@ class Taxonomy:
                 if ns:
                     if a:
                         a += "; "
-                    a += ns[0]['name']
+                    a += ns[0]['name_']
             return nodes[0], a
         return None, None
 
     def find_node_by_name(self, name):
         for n in self.nodes:
-            if n[1]['name'].casefold() == name.casefold():
+            if n[1]['name_'].casefold() == name.casefold():
                 return n
         return None
 
@@ -131,7 +132,7 @@ class Taxonomy:
             if ns:
                 if a:
                     a += "; "
-                a += ns[0]['name']
+                a += ns[0]['name_']
         return a
 
     def get_lineage_by_name(self, name):
@@ -208,7 +209,7 @@ class Taxonomy:
         if step < deep and size >= min_size_child:
             for t in self.tax.successors(node[1]['id']):
                 if t != node[1]['id']:
-                    self.print_size(self.nodes[str(t)]['name'],
+                    self.print_size(self.nodes[str(t)]['name_'],
                                     deep, step, min_size, min_size_child)
 
     def get_taxonomy_group_from_taxid(self, taxid):
