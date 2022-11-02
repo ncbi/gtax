@@ -42,7 +42,7 @@ def filter_metadata_zip():
                         '{}/ncbi_dataset/data/assembly_data_report.jsonl'.format(db), 'w') as fjson_out:
                     for line in fjson.readlines():
                         d = json.loads(line.decode("utf-8"))
-                        v = assemblies_tmp.setdefault(d['taxId'], [])
+                        v = assemblies_tmp.setdefault(d['organism']['taxId'], [])
                         v.append(d)
                     for s in assemblies_tmp.keys():
                         rep_genome = []
@@ -50,10 +50,10 @@ def filter_metadata_zip():
                             if 'refseqCategory' in e['assemblyInfo']:
                                 rep_genome.append(e)
                         if len(rep_genome) == 1:
-                            assemblies.append(rep_genome[0]['assemblyInfo']['assemblyAccession'])
+                            assemblies.append(rep_genome[0]['accession'])
                             fjson_out.write('{}\n'.format(json.dumps(rep_genome[0])))
                         else:
-                            assemblies.append(assemblies_tmp[s][0]['assemblyInfo']['assemblyAccession'])
+                            assemblies.append(assemblies_tmp[s][0]['accession'])
                             fjson_out.write('{}\n'.format(json.dumps(assemblies_tmp[s][0])))
 
                 print('There are {} assemblies included'.format(len(assemblies)))
