@@ -66,32 +66,28 @@ Archaea
 
 .. code-block:: bash
 
-    localhost:~> cd archaea
-    localhost:~> ./datasets rehydrate --directory .
+    localhost:~> ./datasets rehydrate --directory archaea/
 
 Bacteria
 ========
 
 .. code-block:: bash
 
-    localhost:~> cd bacteria
-    localhost:~> ./datasets rehydrate --directory .
+    localhost:~> ./datasets rehydrate --directory bacteria/
 
 Viruses
 =======
 
 .. code-block:: bash
 
-    localhost:~> cd viruses
-    localhost:~> ./datasets rehydrate --directory .
+    localhost:~> ./datasets rehydrate --directory viruses/
 
 Eukaryotes
 ==========
 
 .. code-block:: bash
 
-    localhost:~> cd eukaryotes
-    localhost:~> ./datasets rehydrate --directory .
+    localhost:~> ./datasets rehydrate --directory eukaryotes/
 
 Create Gtax FASTA files
 -----------------------
