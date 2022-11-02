@@ -24,32 +24,28 @@ Archaea
 
 .. code-block:: bash
 
-    localhost:~> ./datasets download genome taxon 2157 --assembly-source refseq --dehydrated
-    localhost:~> mv ncbi_dataset.zip archaea_meta.zip
+    localhost:~> ./datasets download genome taxon 2157 --assembly-source refseq --dehydrated --filename archaea_meta.zip
 
 Bacteria
 ========
 
 .. code-block:: bash
 
-    localhost:~> ./datasets download genome taxon 2 --assembly-source refseq --dehydrated
-    localhost:~> mv ncbi_dataset.zip bacteria_meta.zip
+    localhost:~> ./datasets download genome taxon 2 --assembly-source refseq --dehydrated --filename bacteria_meta.zip
 
 Viruses
 =======
 
 .. code-block:: bash
 
-    localhost:~> ./datasets download genome taxon 10239 --assembly-source refseq --dehydrated
-    localhost:~> mv ncbi_dataset.zip viruses_meta.zip
+    localhost:~> ./datasets download genome taxon 10239 --assembly-source refseq --dehydrated --filename viruses_meta.zip
 
 Eukaryotes
 ==========
 
 .. code-block:: bash
 
-    localhost:~> ./datasets download genome taxon 2759 --assembly-source refseq --dehydrated
-    localhost:~> mv ncbi_dataset.zip eukaryotes_meta.zip
+    localhost:~> ./datasets download genome taxon 2759 --assembly-source refseq --dehydrated --filename eukaryotes_meta.zip
 
 Process metadata and creates the directories for hydration
 ----------------------------------------------------------
