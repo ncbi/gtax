@@ -8,9 +8,14 @@ from functools import partial
 from gtax.taxonomy import Taxonomy
 
 
-def transcript_contamination(t, blast_df, tax_ids, taxonomy):
-    df = blast_df[blast_df['qseqid'] == t]
-    if not df.empty:
+def transcript_contamination(filename, blast_columns, tax_ids, taxonomy):
+    blast_df = pandas.read_csv(filename, sep='\t', header=None,
+                               names=blast_columns.split(' '),
+                               low_memory=False)
+    groupby_qseqid = blast_df.groupby('qseqid')
+    data = []
+    for g in groupby_qseqid.groups.keys():
+        df = groupby_qseqid.get_group(g)
         df = df[df['evalue'] == df['evalue'].min()]
         if not all(elem in tax_ids for elem in df['staxid'].unique()):
             df = df[~df.staxid.isin(tax_ids)].sort_values(by='bitscore', ascending=False).reset_index()
@@ -19,8 +24,10 @@ def transcript_contamination(t, blast_df, tax_ids, taxonomy):
                 node = node[0]['name_']
             else:
                 node = str(df['staxid'].iloc[0])
-            return t, True, node, df['evalue'].iloc[0], df['saccver'].iloc[0], df['staxid'].iloc[0]
-    return t, False
+            data.append([g, True, node, df['evalue'].iloc[0], df['saccver'].iloc[0], df['staxid'].iloc[0]])
+        else:
+            data.append([g, False, False, False, False, False ])
+    return data
 
 
 def taxonomy_blast():
@@ -59,21 +66,18 @@ def taxonomy_blast():
     cont_ids = set()
     with open('{}_cont.tsv'.format(args.prefix), 'w') as f_cont:
         f_cont.write('transcript\tsubject\tevalue\ttax_id\ttaxa\n')
-        for f in files:
-            blast_df = pandas.read_csv(f, sep='\t', header=None,
-                                           names=args.blast_columns.split(' '),
-                                           low_memory=False)
-            print(f"{len(blast_df)} BLAST results loaded from {f}")
-            with Pool(processes=int(args.threads)) as p:
-                results = p.map(partial(transcript_contamination,
-                                        blast_df=blast_df,
-                                        tax_ids=tax_ids, taxonomy=taxonomy),
-                                blast_df.qseqid.unique())
-                for r in results:
+        with Pool(processes=int(args.threads)) as p:
+            results = p.map(partial(transcript_contamination,
+                                    blast_columns=args.blast_columns,
+                                    tax_ids=tax_ids, taxonomy=taxonomy),
+                            files)
+            for data in results:
+                for r in data:
                     if r[1]:
                         contamination += 1
                         cont_ids.add(r[0])
                         f_cont.write('{}\t{}\t{}\t{}\t{}\n'.format(r[0], r[4], r[3], r[5], r[2]))
+
     with open('{}_clean.fsa'.format(args.prefix), 'w') as f_fsa:
         for r in records:
             if r not in cont_ids:

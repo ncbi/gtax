@@ -11,12 +11,20 @@ GTax uses four taxonomy superkingdoms for downloading data: *archaea*, *bacteria
 
 Users need to run these commands to download the genomes sequences:
 
+Datasets
+========
+
+.. code-block:: bash
+
+    localhost:~> wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/datasets
+    localhost:~> chmod a+x datasets
+
 Archaea
 =======
 
 .. code-block:: bash
 
-    localhost:~> datasets download genome taxon 2157 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
+    localhost:~> ./datasets download genome taxon 2157 --assembly-source refseq --dehydrated
     localhost:~> mv ncbi_dataset.zip archaea_meta.zip
 
 Bacteria
@@ -24,7 +32,7 @@ Bacteria
 
 .. code-block:: bash
 
-    localhost:~> datasets download genome taxon 2 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
+    localhost:~> ./datasets download genome taxon 2 --assembly-source refseq --dehydrated
     localhost:~> mv ncbi_dataset.zip bacteria_meta.zip
 
 Viruses
@@ -32,7 +40,7 @@ Viruses
 
 .. code-block:: bash
 
-    localhost:~> datasets download genome taxon 10239 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
+    localhost:~> ./datasets download genome taxon 10239 --assembly-source refseq --dehydrated
     localhost:~> mv ncbi_dataset.zip viruses_meta.zip
 
 Eukaryotes
@@ -40,7 +48,7 @@ Eukaryotes
 
 .. code-block:: bash
 
-    localhost:~> datasets download genome taxon 2759 --assembly-source refseq --exclude-gff3 --exclude-protein --exclude-rna --exclude-gff3 --exclude-rna --exclude-genomic-cds --dehydrated
+    localhost:~> ./datasets download genome taxon 2759 --assembly-source refseq --dehydrated
     localhost:~> mv ncbi_dataset.zip eukaryotes_meta.zip
 
 Process metadata and creates the directories for hydration
@@ -63,7 +71,7 @@ Archaea
 .. code-block:: bash
 
     localhost:~> cd archaea
-    localhost:~> datasets rehydrate --directory .
+    localhost:~> ./datasets rehydrate --directory .
 
 Bacteria
 ========
@@ -71,7 +79,7 @@ Bacteria
 .. code-block:: bash
 
     localhost:~> cd bacteria
-    localhost:~> datasets rehydrate --directory .
+    localhost:~> ./datasets rehydrate --directory .
 
 Viruses
 =======
@@ -79,7 +87,7 @@ Viruses
 .. code-block:: bash
 
     localhost:~> cd viruses
-    localhost:~> datasets rehydrate --directory .
+    localhost:~> ./datasets rehydrate --directory .
 
 Eukaryotes
 ==========
@@ -87,7 +95,7 @@ Eukaryotes
 .. code-block:: bash
 
     localhost:~> cd eukaryotes
-    localhost:~> datasets rehydrate --directory .
+    localhost:~> ./datasets rehydrate --directory .
 
 Create Gtax FASTA files
 -----------------------
