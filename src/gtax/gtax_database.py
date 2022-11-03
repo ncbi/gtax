@@ -30,7 +30,7 @@ def create_taxonomy_group_fasta(db):
     with open('{}/ncbi_dataset/data/assembly_data_report.jsonl'.format(db)) as fjson:
         for line in fjson.readlines():
             d = json.loads(line)
-            assemblies[d['assemblyInfo']['assemblyAccession']] = d['taxId']
+            assemblies[d['accession']] = d['organism']['taxId']
     for s in assemblies:
         files = [f for ds, dr, files in os.walk('{}/ncbi_dataset/data/{}'.format(db, s))
                  for f in files if
@@ -68,8 +68,8 @@ def create_taxonomy_group_eukaryotes_fasta(db, taxonomy):
     with open('eukaryotes/ncbi_dataset/data/assembly_data_report.jsonl') as fjson:
         for line in fjson.readlines():
             d = json.loads(line)
-            if int(d['taxId']) in taxonomy.taxonomy_groups[db]['nodes']:
-                assemblies[d['assemblyInfo']['assemblyAccession']] = d['taxId']
+            if int(d['organism']['taxId']) in taxonomy.taxonomy_groups[db]['nodes']:
+                assemblies[d['accession']] = d['organism']['taxId']
     for s in assemblies:
         files = [f for ds, dr, files in os.walk('eukaryotes/ncbi_dataset/data/{}'.format(s))
                  for f in files if

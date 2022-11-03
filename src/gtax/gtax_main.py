@@ -36,7 +36,7 @@ def filter_metadata_zip():
             if not os.path.exists('{}/ncbi_dataset/data'.format(db)):
                 os.makedirs('{}/ncbi_dataset/data'.format(db))
             with ZipFile('{}_meta.zip'.format(db), 'r') as zip:
-                assemblies = []
+                assemblies = set()
                 assemblies_tmp = {}
                 with zip.open('ncbi_dataset/data/assembly_data_report.jsonl') as fjson, open(
                         '{}/ncbi_dataset/data/assembly_data_report.jsonl'.format(db), 'w') as fjson_out:
@@ -50,10 +50,10 @@ def filter_metadata_zip():
                             if 'refseqCategory' in e['assemblyInfo']:
                                 rep_genome.append(e)
                         if len(rep_genome) == 1:
-                            assemblies.append(rep_genome[0]['accession'])
+                            assemblies.add(rep_genome[0]['accession'])
                             fjson_out.write('{}\n'.format(json.dumps(rep_genome[0])))
                         else:
-                            assemblies.append(assemblies_tmp[s][0]['accession'])
+                            assemblies.add(assemblies_tmp[s][0]['accession'])
                             fjson_out.write('{}\n'.format(json.dumps(assemblies_tmp[s][0])))
 
                 print('There are {} assemblies included'.format(len(assemblies)))
