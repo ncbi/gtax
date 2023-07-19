@@ -38,6 +38,8 @@ Current version
 The current public version is available in GCP for download. You need to use your GCP project as this bucket uses
 **Requester Pays** option.
 
+   https://console.cloud.google.com/storage/browser/gtax-database/20211025
+
 .. code-block:: bash
 
    gsutil -u <you-GCP-project> -m cp -r gs://gtax-database/20211025 .
