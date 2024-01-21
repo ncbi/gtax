@@ -4,12 +4,12 @@
 Use existing GTax database metadata in Python
 #############################################
 
-Download current Python objects in pickle format from GCP
+Download current Python objects in pickle format from GCP. Find latest version from: https://console.cloud.google.com/storage/browser/gtax-database/ 
 
 .. code-block:: bash
 
-    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/20221102/fasta/taxonomy.pickle .
-    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/20221102/fasta/taxonomy_groups.pickle .
+    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/<latest_version>/fasta/taxonomy.pickle .
+    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/<latest_version>/fasta/taxonomy_groups.pickle .
 
 Loading data in Python
 
@@ -51,12 +51,18 @@ FASTA and taxonomy maps
 
 .. code-block:: bash
 
-    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/20221102/fasta .
+    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/<latest_version>/fasta .
 
 BLAST databases
 ---------------
 
 .. code-block:: bash
 
-    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/20221102/blastdb .
+    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/<latest_version>/blastdb .
 
+Kraken2 databases
+---------------
+
+.. code-block:: bash
+
+    localhost:~> gsutil -u <your-GCP-project-ID> -m cp gs://gtax-database/<latest_version>/kraken2 .
