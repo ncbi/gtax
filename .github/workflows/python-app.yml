@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@@main
+    - uses: actions/checkout@main
     - name: Set up Python 3.11
-      uses: actions/setup-python@@main
+      uses: actions/setup-python@main
       with:
         python-version: 3.11
     - name: Install dependencies
