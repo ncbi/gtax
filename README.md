@@ -15,7 +15,7 @@ The current public version is available in GCP for download. You need to use you
 **Requester Pays** option.
 
 ```
-gsutil -u <you-GCP-project> -m cp -r gs://gtax-database/20221102 .
+gsutil -u <you-GCP-project> -m cp -r gs://gtax-database/20240121 .
 ```
     
 The database is comprised of two folder: **blastdb** and **fasta**. The **blastdb** folder include the BLAST 
