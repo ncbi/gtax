@@ -24,14 +24,15 @@ def transcript_contamination(filename, blast_columns, tax_ids, taxonomy):
                 node = node[0]['name_']
             else:
                 node = str(df['staxid'].iloc[0])
-            data.append([g, True, node, df['evalue'].iloc[0], df['saccver'].iloc[0], df['staxid'].iloc[0]])
+            data.append([g, True, node, df['evalue'].iloc[0], df['sseqid'].iloc[0], df['staxid'].iloc[0]])
         else:
             data.append([g, False, False, False, False, False ])
     return data
 
 
 def taxonomy_blast():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog='taxonomy_blast',
+                                     description='This tools process BLAST output to find contamination.')
 
     parser.add_argument('--threads', help='No. of threads',
                         required=True)

@@ -69,9 +69,42 @@ def filter_metadata_zip():
                             catalog.append(c)
                     d['assemblies'] = catalog
                     fjson_out.write(json.dumps(d, indent=2))
-                with zip.open('ncbi_dataset/fetch.txt') as fin, open('{}/ncbi_dataset/fetch.txt'.format(db), 'w') as fout:
+                with zip.open('ncbi_dataset/fetch.txt') as fin, open('{}/ncbi_dataset/fetch.txt'.format(db),
+                                                                     'w') as fout:
                     for line in fin.readlines():
                         line = line.decode("utf-8")
                         f = os.path.dirname(line.split('\t')[2].replace('data/', ''))
                         if f in assemblies:
                             fout.write(line)
+
+
+def gtax():
+    import argparse
+    from argparse import RawTextHelpFormatter
+    from gtax import __version__
+
+    epilog = '''
+        For more information see https://gtax.readthedocs.io/en/latest/index.html
+        
+        Available programs:
+        
+        
+        filter_metadata_zip: Read the zipped metadata file for each superkingdom and create the folders 
+                             for hydration with the datasets command. 
+        gtax_database: Creates the FASTA, indexes and TaxID maps for the databases.
+        taxonomy_blast: Process BLAST output to find contamination.
+        
+        Cite: 
+        
+        Alvarez, R.V., Landsman, D. GTax: improving de novo transcriptome assembly by removing foreign RNA 
+        contamination. Genome Biol 25, 12 (2024). https://doi.org/10.1186/s13059-023-03141-2
+    '''
+    parser = argparse.ArgumentParser(prog='gtax',
+                                     description='GTax python package provides tools for the creation '
+                                                 'of the GTax sequence-based database.',
+                                     epilog=epilog,
+                                     formatter_class=RawTextHelpFormatter)
+
+    parser.add_argument("-v", "--version", action="version", version=__version__)
+    args = parser.parse_args()
+    parser.print_help()
