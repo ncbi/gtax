@@ -31,6 +31,8 @@ def gtax_database():
 def filter_metadata_zip():
     superkingdoms = ['archaea', 'bacteria', 'viruses', 'eukaryotes']
 
+    taxonomy = Taxonomy()
+    taxids = set()
     for db in superkingdoms:
         if os.path.exists('{}_meta.zip'.format(db)):
             if not os.path.exists('{}/ncbi_dataset/data'.format(db)):
@@ -44,6 +46,7 @@ def filter_metadata_zip():
                         d = json.loads(line.decode("utf-8"))
                         v = assemblies_tmp.setdefault(d['organism']['taxId'], [])
                         v.append(d)
+                    taxids.update(set(assemblies_tmp.keys()))
                     for s in assemblies_tmp.keys():
                         rep_genome = []
                         for e in assemblies_tmp[s]:
@@ -76,6 +79,15 @@ def filter_metadata_zip():
                         f = os.path.dirname(line.split('\t')[2].replace('data/', ''))
                         if f in assemblies:
                             fout.write(line)
+    no_genomes = []
+    for k, v in taxonomy.taxonomy_groups.items():
+        if not taxids.intersection(v['nodes']):
+            no_genomes.append([k, v['taxid']])
+    if no_genomes:
+        print(f"Taxonomy groups with no genomes: {len(no_genomes)}")
+        for g in no_genomes:
+            print(f"{g[0]}\t{g[1]}")
+
 
 
 def gtax():
