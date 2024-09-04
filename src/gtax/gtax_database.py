@@ -88,7 +88,7 @@ def create_taxonomy_group_eukaryotes_fasta(db, taxonomy):
     fstream.close()
     fstream_tax.close()
     fstream_idx.close()
-    print(db + ' done')
+    print(f"{db} done with {len(ids)} assemblies")
 
 
 def gtax_parallel(db, taxonomy):
