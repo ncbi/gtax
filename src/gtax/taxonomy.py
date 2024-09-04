@@ -51,9 +51,9 @@ class Taxonomy:
             'lycopodiopsida': {'taxid': '1521260', 'nodes': set(), 'sequences': set(), 'size': 0},
             'polypodiopsida': {'taxid': '241806', 'nodes': set(), 'sequences': set(), 'size': 0},
             'acrogymnospermae': {'taxid': '1437180', 'nodes': set(), 'sequences': set(), 'size': 0},
-            'magnoliopsida': {'taxid': '3398', 'nodes': set(), 'sequences': set(), 'size': 0},
             'liliopsida': {'taxid': '4447', 'nodes': set(), 'sequences': set(), 'size': 0},
             'eudicotyledons': {'taxid': '71240', 'nodes': set(), 'sequences': set(), 'size': 0},
+            'magnoliopsida': {'taxid': '3398', 'nodes': set(), 'sequences': set(), 'size': 0},
             'viridiplantae': {'taxid': '33090', 'nodes': set(), 'sequences': set(), 'size': 0},
             'fungi': {'taxid': '4751', 'nodes': set(), 'sequences': set(), 'size': 0},
             'arthropoda': {'taxid': '6656', 'nodes': set(), 'sequences': set(), 'size': 0},
@@ -183,17 +183,23 @@ class Taxonomy:
 
     def create_taxonomy_groups(self):
         inserted = set()
+        groups_to_delete = []
         for k in self.taxonomy_groups:
             self.taxonomy_groups[k]['nodes'] = \
                 self.get_successors(self.taxonomy_groups[k]['taxid']).difference(
                     inserted)
-            inserted.update(self.taxonomy_groups[k]['nodes'])
-            self.add_sequences_size_from_gtax_idx(k)
-            for node_id in self.taxonomy_groups[k]['nodes']:
-                node_id = str(node_id)
-                if 'size' in self.nodes[node_id]:
-                    self.taxonomy_groups[k]['sequences'].update(self.nodes[node_id]['sequences'])
-                    self.taxonomy_groups[k]['size'] += self.nodes[node_id]['size']
+            if self.taxonomy_groups[k]['nodes']:
+                inserted.update(self.taxonomy_groups[k]['nodes'])
+                self.add_sequences_size_from_gtax_idx(k)
+                for node_id in self.taxonomy_groups[k]['nodes']:
+                    node_id = str(node_id)
+                    if 'size' in self.nodes[node_id]:
+                        self.taxonomy_groups[k]['sequences'].update(self.nodes[node_id]['sequences'])
+                        self.taxonomy_groups[k]['size'] += self.nodes[node_id]['size']
+            else:
+                groups_to_delete.append(k)
+        for g in groups_to_delete:
+            del self.taxonomy_groups[g]
 
     def create_pickle(self, tax_pickle_file, group_pickle_file):
         print('Printing tax graph pickle file: {}'.format(tax_pickle_file))
