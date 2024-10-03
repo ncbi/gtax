@@ -169,7 +169,8 @@ class Taxonomy:
         print('{} with {} taxa'.format(taxid, len(self.taxonomy_groups[taxid]['nodes'])))
 
     def add_sequences_size_from_gtax_idx(self, taxonomy_group):
-        if os.path.exists('{}.idx'.format(taxonomy_group)):
+        index_file_name = f'{taxonomy_group}.idx'
+        if os.path.exists(index_file_name) and os.path.getsize(index_file_name) != 0:
             df = pandas.read_csv('{}.idx'.format(taxonomy_group), sep='\t', header=None)
             print('{} sequences loaded from the index'.format(len(df)))
             seq = {}
