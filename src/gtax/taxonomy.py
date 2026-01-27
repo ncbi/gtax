@@ -45,11 +45,8 @@ class Taxonomy:
         self.taxonomy_groups = kwargs.get('taxonomy_groups', {
             'bacteria': {'taxid': '2', 'nodes': set(), 'sequences': set(), 'size': 0},
             'archaea': {'taxid': '2157', 'nodes': set(), 'sequences': set(), 'size': 0},
-            'anthocerotophyta': {'taxid': '13809', 'nodes': set(), 'sequences': set(), 'size': 0},
             'bryophyta': {'taxid': '3208', 'nodes': set(), 'sequences': set(), 'size': 0},
-            'marchantiophyta': {'taxid': '3195', 'nodes': set(), 'sequences': set(), 'size': 0},
             'lycopodiopsida': {'taxid': '1521260', 'nodes': set(), 'sequences': set(), 'size': 0},
-            'polypodiopsida': {'taxid': '241806', 'nodes': set(), 'sequences': set(), 'size': 0},
             'acrogymnospermae': {'taxid': '1437180', 'nodes': set(), 'sequences': set(), 'size': 0},
             'liliopsida': {'taxid': '4447', 'nodes': set(), 'sequences': set(), 'size': 0},
             'eudicotyledons': {'taxid': '71240', 'nodes': set(), 'sequences': set(), 'size': 0},
