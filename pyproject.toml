@@ -35,6 +35,7 @@ requests = "*"
 pytest = "*"
 pytest-cov = "*"
 tox = "*"
+flake8 = "*"
 
 [tool.poetry.scripts]
 gtax = "gtax.gtax_main:gtax"
