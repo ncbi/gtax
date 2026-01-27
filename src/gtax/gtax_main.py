@@ -115,4 +115,5 @@ def gtax():
                                      formatter_class=RawTextHelpFormatter)
 
     parser.add_argument("-v", "--version", action="version", version=__version__)
+    parser.parse_args()
     parser.print_help()
