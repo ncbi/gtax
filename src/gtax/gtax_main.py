@@ -59,7 +59,7 @@ def filter_metadata_zip():
                             assemblies.add(assemblies_tmp[s][0]['accession'])
                             fjson_out.write('{}\n'.format(json.dumps(assemblies_tmp[s][0])))
 
-                print('There are {} assemblies included'.format(len(assemblies)))
+                print(f'There are {len(assemblies)} assemblies included in {db}')
                 with zip.open('ncbi_dataset/data/dataset_catalog.json') as fjson, open(
                         '{}/ncbi_dataset/data/dataset_catalog.json'.format(db), 'w') as fjson_out:
                     d = json.loads(fjson.read().decode("utf-8"))
