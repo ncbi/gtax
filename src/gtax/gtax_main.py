@@ -89,28 +89,25 @@ def filter_metadata_zip():
             print(f"{g[0]}\t{g[1]}")
 
 
+epilog = """For more information see https://gtax.readthedocs.io/en/latest/index.html
+
+Available programs:
+
+filter_metadata_zip: Read the zipped metadata file for each superkingdom and create the folders 
+                     for hydration with the datasets command.
+gtax_database: Creates the FASTA, indexes and TaxID maps for the databases.
+taxonomy_blast: Process BLAST output to find contamination.
+
+Cite:
+Alvarez, R.V., Landsman, D. GTax: improving de novo transcriptome assembly by removing foreign RNA
+contamination. Genome Biol 25, 12 (2024). https://doi.org/10.1186/s13059-023-03141-2"""
+
 
 def gtax():
     import argparse
     from argparse import RawTextHelpFormatter
     from gtax import __version__
 
-    epilog = '''
-        For more information see https://gtax.readthedocs.io/en/latest/index.html
-        
-        Available programs:
-        
-        
-        filter_metadata_zip: Read the zipped metadata file for each superkingdom and create the folders 
-                             for hydration with the datasets command. 
-        gtax_database: Creates the FASTA, indexes and TaxID maps for the databases.
-        taxonomy_blast: Process BLAST output to find contamination.
-        
-        Cite: 
-        
-        Alvarez, R.V., Landsman, D. GTax: improving de novo transcriptome assembly by removing foreign RNA 
-        contamination. Genome Biol 25, 12 (2024). https://doi.org/10.1186/s13059-023-03141-2
-    '''
     parser = argparse.ArgumentParser(prog='gtax',
                                      description='GTax python package provides tools for the creation '
                                                  'of the GTax sequence-based database.',
@@ -118,5 +115,4 @@ def gtax():
                                      formatter_class=RawTextHelpFormatter)
 
     parser.add_argument("-v", "--version", action="version", version=__version__)
-    args = parser.parse_args()
     parser.print_help()
