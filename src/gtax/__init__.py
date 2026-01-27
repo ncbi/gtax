@@ -1,8 +1,6 @@
-from pkg_resources import DistributionNotFound
+from importlib.metadata import PackageNotFoundError, version
 
 try:
-    _distribution = __import__('pkg_resources').get_distribution("gtax")
-except DistributionNotFound:  # Likely, running from working dir without installed dist
-    __version__ = 'SNAPSHOT'
-else:
-    __version__ = _distribution.version if _distribution else 'SNAPSHOT'
+    __version__ = version("gtax")
+except PackageNotFoundError:
+    __version__ = "0.0.0"

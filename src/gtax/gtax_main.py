@@ -31,6 +31,8 @@ def gtax_database():
 def filter_metadata_zip():
     superkingdoms = ['archaea', 'bacteria', 'viruses', 'eukaryotes']
 
+    taxonomy = Taxonomy()
+    taxids = set()
     for db in superkingdoms:
         if os.path.exists('{}_meta.zip'.format(db)):
             if not os.path.exists('{}/ncbi_dataset/data'.format(db)):
@@ -44,6 +46,7 @@ def filter_metadata_zip():
                         d = json.loads(line.decode("utf-8"))
                         v = assemblies_tmp.setdefault(d['organism']['taxId'], [])
                         v.append(d)
+                    taxids.update(set(assemblies_tmp.keys()))
                     for s in assemblies_tmp.keys():
                         rep_genome = []
                         for e in assemblies_tmp[s]:
@@ -56,7 +59,7 @@ def filter_metadata_zip():
                             assemblies.add(assemblies_tmp[s][0]['accession'])
                             fjson_out.write('{}\n'.format(json.dumps(assemblies_tmp[s][0])))
 
-                print('There are {} assemblies included'.format(len(assemblies)))
+                print(f'There are {len(assemblies)} assemblies included in {db}')
                 with zip.open('ncbi_dataset/data/dataset_catalog.json') as fjson, open(
                         '{}/ncbi_dataset/data/dataset_catalog.json'.format(db), 'w') as fjson_out:
                     d = json.loads(fjson.read().decode("utf-8"))
@@ -76,6 +79,28 @@ def filter_metadata_zip():
                         f = os.path.dirname(line.split('\t')[2].replace('data/', ''))
                         if f in assemblies:
                             fout.write(line)
+    no_genomes = []
+    for k, v in taxonomy.taxonomy_groups.items():
+        if not taxids.intersection(v['nodes']):
+            no_genomes.append([k, v['taxid']])
+    if no_genomes:
+        print(f"Taxonomy groups with no genomes: {len(no_genomes)}")
+        for g in no_genomes:
+            print(f"{g[0]}\t{g[1]}")
+
+
+epilog = """For more information see https://gtax.readthedocs.io/en/latest/index.html
+
+Available programs:
+
+filter_metadata_zip: Read the zipped metadata file for each superkingdom and create the folders 
+                     for hydration with the datasets command.
+gtax_database: Creates the FASTA, indexes and TaxID maps for the databases.
+taxonomy_blast: Process BLAST output to find contamination.
+
+Cite:
+Alvarez, R.V., Landsman, D. GTax: improving de novo transcriptome assembly by removing foreign RNA
+contamination. Genome Biol 25, 12 (2024). https://doi.org/10.1186/s13059-023-03141-2"""
 
 
 def gtax():
@@ -83,22 +108,6 @@ def gtax():
     from argparse import RawTextHelpFormatter
     from gtax import __version__
 
-    epilog = '''
-        For more information see https://gtax.readthedocs.io/en/latest/index.html
-        
-        Available programs:
-        
-        
-        filter_metadata_zip: Read the zipped metadata file for each superkingdom and create the folders 
-                             for hydration with the datasets command. 
-        gtax_database: Creates the FASTA, indexes and TaxID maps for the databases.
-        taxonomy_blast: Process BLAST output to find contamination.
-        
-        Cite: 
-        
-        Alvarez, R.V., Landsman, D. GTax: improving de novo transcriptome assembly by removing foreign RNA 
-        contamination. Genome Biol 25, 12 (2024). https://doi.org/10.1186/s13059-023-03141-2
-    '''
     parser = argparse.ArgumentParser(prog='gtax',
                                      description='GTax python package provides tools for the creation '
                                                  'of the GTax sequence-based database.',
@@ -106,5 +115,5 @@ def gtax():
                                      formatter_class=RawTextHelpFormatter)
 
     parser.add_argument("-v", "--version", action="version", version=__version__)
-    args = parser.parse_args()
+    parser.parse_args()
     parser.print_help()

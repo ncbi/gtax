@@ -26,7 +26,7 @@ def transcript_contamination(filename, blast_columns, tax_ids, taxonomy):
                 node = str(df['staxid'].iloc[0])
             data.append([g, True, node, df['evalue'].iloc[0], df['sseqid'].iloc[0], df['staxid'].iloc[0]])
         else:
-            data.append([g, False, False, False, False, False ])
+            data.append([g, False, False, False, False, False])
     return data
 
 

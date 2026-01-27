@@ -183,9 +183,8 @@ def create_random_single_end_files(reference_file, output_prefix,
                                    taxonomy, foreign_contamination_percent,
                                    gtax_fasta_dir, taxonomy_group):
     print("Creating single-end short sequences")
-    ref_number_sequences = number_sequences - \
-                           (number_sequences * foreign_contamination_percent *
-                            (len(taxonomy.taxonomy_groups) - 1))
+    ref_number_sequences = number_sequences * foreign_contamination_percent * (len(taxonomy.taxonomy_groups) - 1)
+    ref_number_sequences = number_sequences - ref_number_sequences
     transcripts, number_seq_factor = load_reference_transcripts(reference_file,
                                                                 ref_number_sequences, short_seq_len)
 

@@ -1,0 +1,55 @@
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[tool.poetry]
+name = "gtax"
+version = "0.0.0"
+description = "Gtax generate a taxonomy sequence database by genomes"
+authors = ["Vera Alvarez, Roberto <veraalva@ncbi.nlm.nih.gov>"]
+maintainers = ["Vera Alvarez, Roberto <veraalva@ncbi.nlm.nih.gov>"]
+license = "Public Domain"
+readme = "README.md"
+homepage = "https://github.com/ncbi/gtax"
+repository = "https://github.com/ncbi/gtax"
+documentation = "https://gtax.readthedocs.io/"
+keywords = ["Taxonomy", "Genomic"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Operating System :: Unix",
+    "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+packages = [{include = "gtax", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+biopython = "*"
+networkx = "*"
+numpy = "*"
+pandas = "*"
+requests = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-cov = "*"
+tox = "*"
+flake8 = "*"
+
+[tool.poetry.scripts]
+gtax = "gtax.gtax_main:gtax"
+taxonomy_pickle = "gtax.taxonomy_main:taxonomy_pickle"
+gtax_database = "gtax.gtax_main:gtax_database"
+filter_metadata_zip = "gtax.gtax_main:filter_metadata_zip"
+create_random_short_sequences = "gtax.sequence:create_random_short_sequences"
+sequence_binning = "gtax.sequence_binning:sequence_binning_main"
+taxonomy_blast = "gtax.taxonomy_blast:taxonomy_blast"
+
+[tool.poetry.urls]
+Tracker = "https://github.com/ncbi/pm4ngs/issues"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
